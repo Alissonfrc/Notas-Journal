@@ -22,13 +22,17 @@ O arquivo que gera a seed do banco está em `backend/seed.sql`.
 
 ## 4. Endpoints iniciais
 
-Inicialmente serão implementados os endpoints CRUD de tarefas:
+Inicialmente serão implementados os endpoints de usuários e os endpoints CRUD de tarefas, nesta ordem:
 
+- `POST /usuarios`: cria um novo usuário.
+- `GET /usuarios/:id`: busca um usuário pelo identificador.
 - `GET /tarefas`: lista todas as tarefas.
 - `GET /tarefas/:id`: busca uma tarefa pelo identificador.
 - `POST /tarefas`: cria uma nova tarefa.
 - `PUT /tarefas/:id`: atualiza uma tarefa existente.
 - `DELETE /tarefas/:id`: remove uma tarefa.
+
+Os endpoints de usuários devem ser implementados primeiro porque a tabela `tarefas` possui a coluna `usuario_id` como chave estrangeira para a tabela `usuario`. Assim, é necessário criar um usuário antes de cadastrar uma tarefa, garantindo que ela seja vinculada a um registro válido e evitando erros de integridade no banco. 
 
 ## 5. Framework utilizado
 
