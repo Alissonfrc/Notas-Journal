@@ -1,3 +1,4 @@
 .env
 comandos_sql.sql
 comandos_utilitarios.txt
+node_modules/
