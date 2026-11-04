@@ -1,0 +1,20 @@
+import "dotenv/config";
+import express from "express";
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./docs/swagger";
+import authRoutes from "./auth/auth.routes";
+import usuariosRoutes from "./usuarios/usuarios.routes";
+import notasRoutes from "./notas/notas.routes";
+import { AppError } from "./errors/AppError";
+import { errorHandler } from "./errors/errorHandler";
+
+export const app = express();
+app.disable("x-powered-by");
+app.use(express.json({ limit: "4mb" }));
+app.get("/api-docs.json", (_req, res) => { res.json(swaggerSpec); });
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use(usuariosRoutes);
+app.use(authRoutes);
+app.use(notasRoutes);
+app.use((_req, _res, next) => next(new AppError("A rota solicitada não existe.", 404, "ROUTE_NOT_FOUND")));
+app.use(errorHandler);
